@@ -1,6 +1,6 @@
 # MultiChat Room NodeJS
 
-###### A multichat room created with NodeJS using MVC pattern and external modules.
+###### A multichat room created with NodeJS using MVC pattern, Websocket and external modules.
 
 
 
