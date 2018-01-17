@@ -19,7 +19,7 @@
 ## Running Project
 
 ###### Open the shell
-###### Access the directory of the project
+###### Access project's directory
 ###### Locate the app.js 
 ###### Run the code below:
 >```nodemon app ```
