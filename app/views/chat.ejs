@@ -110,7 +110,7 @@
 							<input type="hidden" id="apelido" value="<%= apelido %>" name="apelido"/>
 							<input type="text" class="form-control" placeholder="Mensagem" id="mensagem">
 							<span class="input-group-btn">
-								<button class="btn btn-default" type="button" id="enviar_mensagem">></button>
+								<button class="btn btn-default" type="button" id="enviarMensagem">></button>
 							</span>
 						</div>
 					</div>
@@ -124,20 +124,31 @@
 		<script>
 			var socket = io('http://localhost:3000');
 
-			$('#enviar_mensagem').click(function(){
-				socket.emit(
-					'mensagemParaServidor',
-					{apelido: $('#apelido').val() , mensagem : $('#mensagem').val()}
-				)
+			var $btnEnviarMensagem = $('#enviarMensagem');
+			var $mensagem = $('#mensagem');
+			var $apelido = $('#apelido');
 
-				$('#mensagem').val('');
+			$btnEnviarMensagem.click(function(){
+
+				if($mensagem.val()!=""){
+					socket.emit(
+						'mensagemParaServidor',
+						{apelido: $apelido.val() , mensagem : $mensagem.val()}
+					)
+
+				$mensagem.val('');	
+				}
+
 			});
 
 			socket.on('mensagemParaCliente', function(data){
+				var horario = new Date();
+      				var hora = horario.getHours() + ":" + horario.getMinutes();
 				var html = '';
 				html += '<div class="dialogo">';
-					html += '<h4>'+data.apelido+'</h4>';
+					html += '<h4>'+data.apelido+' <small>('+hora+')</small></h4>';
 					html += '<p>'+data.mensagem+'</p>';
+	
 				html += '</div>';
 
 				$('#dialogos').append(html);
