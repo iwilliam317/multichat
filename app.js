@@ -6,7 +6,6 @@ var server = app.listen(3000, function(){
 
 var io = require('socket.io').listen(server);
 
-
 app.set('io', io);
 
 io.on('connection', function(socket){
@@ -14,5 +13,11 @@ io.on('connection', function(socket){
 
 	socket.on('disconnect', function(){
 		console.log('Usuário desconectou')
+	})
+
+	socket.on('mensagemParaServidor', function(data){
+		socket.emit('mensagemParaCliente', {apelido: data.apelido ,  mensagem: data.mensagem})
+
+		socket.broadcast.emit('mensagemParaCliente', {apelido: data.apelido ,  mensagem: data.mensagem})
 	})
 })
