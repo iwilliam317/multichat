@@ -9,6 +9,7 @@ var io = require('socket.io').listen(server);
 app.set('io', io);
 
 io.on('connection', function(socket){
+	
 	console.log('Usuário conectou');
 
 	socket.on('disconnect', function(){
@@ -16,8 +17,17 @@ io.on('connection', function(socket){
 	})
 
 	socket.on('mensagemParaServidor', function(data){
+
 		socket.emit('mensagemParaCliente', {apelido: data.apelido ,  mensagem: data.mensagem})
 
 		socket.broadcast.emit('mensagemParaCliente', {apelido: data.apelido ,  mensagem: data.mensagem})
+
+		if(parseInt(data.usuarioAtualizadoChat)==0){
+
+			socket.emit('atualizarUsuarioParaCliente', {apelido: data.apelido })
+
+			socket.broadcast.emit('atualizarUsuarioParaCliente', {apelido: data.apelido })
+		}
+
 	})
 })
