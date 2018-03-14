@@ -13,6 +13,8 @@ module.exports.iniciaChat = function(application, req, res){
 		return;
 	}
 
+	req.session.autorizado = true;
+
 	var io = application.get('io');
 	io.emit('mensagemParaCliente', {apelido : dadosForm.apelido, mensagem: 'acabou de entrar'});
 

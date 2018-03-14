@@ -4,6 +4,12 @@ module.exports = function(application){
 	});
 
 	application.get('/chat', function(req, res){
+        if (req.session.autorizado==true){
 		application.app.controllers.chat.iniciaChat(application, req, res);
+          
+        }
+        else{
+          res.redirect("/")
+        }
 	});
 }
