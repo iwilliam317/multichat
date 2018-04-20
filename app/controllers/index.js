@@ -1,3 +1,3 @@
 module.exports.home = function(application, req, res){
-	res.render('index', {erros : ''});
+	res.render('index', {erros : '', dados : ''});
 }

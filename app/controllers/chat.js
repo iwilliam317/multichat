@@ -10,7 +10,7 @@ module.exports.iniciaChat = function(application, req, res){
 	var erros = req.validationErrors();
 
 	if(erros){
-		res.render('index', {erros : erros})
+		res.render('index', {erros : erros , dados: dadosForm})
 		return;
 	}
 
